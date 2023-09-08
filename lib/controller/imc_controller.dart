@@ -26,17 +26,17 @@ class ImcController {
       };
 
   static String imcImage(ImcStatus imcStatus) {
-    const String baseUrl = 'https://svgsilh.com/svg/';
+    String baseUrl(String str) => 'imgs/$str.svg';
 
     return switch (imcStatus) {
-      ImcStatus.magrezaGrave => '${baseUrl}3378748.svg',
-      ImcStatus.magrezaModerada => '${baseUrl}146310.svg',
-      ImcStatus.magrezaLeve => '${baseUrl}1158318.svg',
-      ImcStatus.saudavel || ImcStatus.nan => '${baseUrl}1417046.svg',
-      ImcStatus.sobrepeso => '${baseUrl}30252.svg',
-      ImcStatus.sobrepesoGrau_1 => '${baseUrl}46922.svg',
-      ImcStatus.obesidadeGrau_2 => '${baseUrl}311319.svg',
-      ImcStatus.obesidadeGrau_3 => '${baseUrl}47599.svg'
+      ImcStatus.magrezaGrave => baseUrl('magrezaGrave'),
+      ImcStatus.magrezaModerada => baseUrl('magrezaModerada'),
+      ImcStatus.magrezaLeve => baseUrl('magrezaLeve'),
+      ImcStatus.saudavel || ImcStatus.nan => baseUrl('saudavel'),
+      ImcStatus.sobrepeso => baseUrl('sobrepeso'),
+      ImcStatus.sobrepesoGrau_1 => baseUrl('sobrepesoGrau_1'),
+      ImcStatus.obesidadeGrau_2 => baseUrl('obesidadeGrau_2'),
+      ImcStatus.obesidadeGrau_3 => baseUrl('obesidadeGrau_3')
     };
   }
 }

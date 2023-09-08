@@ -12,8 +12,9 @@
 
 - [x] Exibir em uma Lista
 
-## Designer
-- ###  CupertinoDesigner
+- [ ] Salvar com o hive ou SQLite
+
+
 
 ###  $ IMC = Peso / altura^2 $
 

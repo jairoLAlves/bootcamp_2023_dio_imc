@@ -1,14 +1,19 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
 import 'pages/home_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return const CupertinoApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: Colors.deepPurpleAccent,
+        colorScheme: const ColorScheme.light(),
+      ),
       title: 'Bootcamp 2023 DIO IMC',
-      home: HomePage(),
+      home: const HomePage(),
     );
   }
 }

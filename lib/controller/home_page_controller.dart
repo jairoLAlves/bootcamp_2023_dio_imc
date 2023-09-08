@@ -7,38 +7,42 @@ import 'package:flutter/material.dart';
 import '../util/math_util.dart';
 
 class HomePageController extends ChangeNotifier {
-//altura em cm
+  Pessoa? pessoaAtual;
+
+
+
   double alturaSlider = 170;
-//peso em kg
   double pesoSlider = 62;
+
   double imc = 0;
   ImcStatus imcStatus = ImcStatus.saudavel;
   String imcMessage = '';
   String imcImage = '';
 
-  //TODO - get_pessoa_to_shared_preferences
-  Pessoa? pessoaAtual;
+  void loaderPessoa() {
+    if (pessoaAtual != null) {
+      pessoaAtual!.peso = pesoSlider;
+      pessoaAtual!.altura = alturaSlider;
+    } else {
+      pessoaAtual = Pessoa.empty();
+    }
+  }
 
-  void setImcStatus() {
+
+
+  void loaderImc() {
     imc = MathUtil.calcularIMC(pesoSlider, alturaSlider);
     imcStatus = ImcController.imcStatus(imc);
     imcMessage = ImcController.imcStatusMessage(imcStatus);
     imcImage = ImcController.imcImage(imcStatus);
-    if (pessoaAtual != null) {
-      pessoaAtual?.peso = pesoSlider;
-      pessoaAtual?.altura = alturaSlider;
-    } else {
-      pessoaAtual =
-          Pessoa(nome: "Person01", altura: alturaSlider, peso: pesoSlider);
-    }
     notifyListeners();
   }
 
-  
-
   void saveImc() {
     ImcToday imcToday = ImcToday(DateTime.now(), imc);
-    pessoaAtual?.listaImc?.add(imcToday);
+    pessoaAtual?.addListImc(imcToday);
+    debugPrint(pessoaAtual?.toJson());
     //bool? isIn = pessoaAtual?.listaImc?.contains(imcToday);
+    notifyListeners();
   }
 }

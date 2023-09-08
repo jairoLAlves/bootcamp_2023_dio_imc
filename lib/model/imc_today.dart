@@ -44,7 +44,10 @@ class ImcToday {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ImcToday && other.dateTime == dateTime;
+    return other is ImcToday &&
+        other.dateTime.year == dateTime.year &&
+        other.dateTime.month == dateTime.month &&
+        other.dateTime.day == dateTime.day;
   }
 
   @override

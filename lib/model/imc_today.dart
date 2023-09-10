@@ -1,18 +1,24 @@
 import 'dart:convert';
 
 class ImcToday {
-  DateTime dateTime;
-  double imc;
+  int? id;
+  DateTime dateTime = DateTime.now();
+  double imc = 0.0;
   ImcToday(
+    this.id,
     this.dateTime,
     this.imc,
   );
 
+  ImcToday.empty();
+
   ImcToday copyWith({
+    int? id,
     DateTime? dateTime,
     double? imc,
   }) {
     return ImcToday(
+      id ?? this.id,
       dateTime ?? this.dateTime,
       imc ?? this.imc,
     );
@@ -20,15 +26,17 @@ class ImcToday {
 
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'dateTime': dateTime.millisecondsSinceEpoch,
-      'imc': imc,
+      'imc': imc.round(),
     };
   }
 
   factory ImcToday.fromMap(Map<String, dynamic> map) {
     return ImcToday(
+      map['id'],
       DateTime.fromMillisecondsSinceEpoch(map['dateTime']),
-      map['imc']?.toDouble() ?? 0.0,
+      map['imc'],
     );
   }
 
@@ -38,7 +46,7 @@ class ImcToday {
       ImcToday.fromMap(json.decode(source));
 
   @override
-  String toString() => 'ImcToday(dateTime: $dateTime, imc: $imc)';
+  String toString() => 'ImcToday(id: $id, dateTime: $dateTime, imc: $imc)';
 
   @override
   bool operator ==(Object other) {
@@ -51,5 +59,5 @@ class ImcToday {
   }
 
   @override
-  int get hashCode => dateTime.hashCode;
+  int get hashCode => id.hashCode;
 }

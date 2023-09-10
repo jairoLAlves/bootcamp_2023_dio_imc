@@ -12,7 +12,7 @@
 
 - [x] Exibir em uma Lista
 
-- [ ] Salvar com o hive ou SQLite
+- [x] Salvar com o hive ou SQLite
 
 
 

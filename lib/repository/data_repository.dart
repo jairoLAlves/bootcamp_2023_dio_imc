@@ -1,4 +1,3 @@
-import 'package:bootcamp_2023_dio_imc/data/db.dart';
 import 'package:bootcamp_2023_dio_imc/model/imc_today.dart';
 import 'package:bootcamp_2023_dio_imc/model/pessoa.dart';
 import 'package:flutter/rendering.dart';
@@ -72,8 +71,9 @@ class DataRepository {
   /////////////////////
   ///
 
-  Future<ImcToday?> getImcToday() async {
-    List<Map<String, dynamic>> data = await _db.query('imc_today', limit: 1);
+  Future<ImcToday?> getImcToday(int id) async {
+    List<Map<String, dynamic>> data = await _db.query('imc_today',
+        where: 'id = ?', whereArgs: [id], limit: 1);
     debugPrint(data.toString());
     if (data.isEmpty) return null;
     // TODO

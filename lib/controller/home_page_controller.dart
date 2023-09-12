@@ -103,12 +103,26 @@ class HomePageController extends ChangeNotifier {
 
   List<ImcToday> get getListImc => [..._listaImc];
 
-  void _addListImc(ImcToday imcToday) {
+  void _addListImc(ImcToday imcToday) async {
     if (!_listaImc.contains(imcToday)) {
       dataRepository.salvarImcToday(imcToday);
-      _listaImc.add(imcToday);
+      _listaImc = await dataRepository.getImcTodayList();
       notifyListeners();
+    } else {
+      if (imcToday.id != null) {
+        dataRepository.updateImcToday(imcToday);
+        _listaImc.remove(imcToday);
+
+        _listaImc = await dataRepository.getImcTodayList();
+        notifyListeners();
+      }
     }
+  }
+
+  void removeListImc(int id) async {
+    dataRepository.deleteImcToday(id);
+    _listaImc = await dataRepository.getImcTodayList();
+    notifyListeners();
   }
 
   void setNome({required String nome}) async {

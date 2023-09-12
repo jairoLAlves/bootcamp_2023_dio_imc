@@ -1,8 +1,6 @@
-import 'package:bootcamp_2023_dio_imc/model/imc_today.dart';
+import 'package:bootcamp_2023_dio_imc/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:svg_flutter/svg.dart';
-import 'package:intl/intl.dart';
 
 import '../controller/home_page_controller.dart';
 
@@ -32,42 +30,33 @@ class _HomePageState extends State<HomePage> {
             children: [
               DrawerHeader(
                 padding: const EdgeInsets.all(0),
-                child: Container(
-                  alignment: Alignment.topLeft,
-                  padding: const EdgeInsets.all(4),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 100,
-                        alignment: Alignment.topLeft,
-                        padding: const EdgeInsets.all(2),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.black12,
-                          maxRadius: 60,
-                          child: CreateImgImc(
-                            image: homePageController.imcImage,
-                          ),
-                        ),
+                child: UserAccountsDrawerHeader(
+                    currentAccountPicture: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      child: createImgImc(
+                        image: homePageController.imcImage,
                       ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Text('Nome: ${homePageController.nome}'),
-                      const Divider(
-                        height: 2,
-                        color: Colors.black26,
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                    accountName: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Nome: ${homePageController.nome}'),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.edit_rounded,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    accountEmail: null),
               ),
               Expanded(
                   child: ListView(
                       children: homePageController.getListImc
                           .map(
-                            (imcItem) => createItemImcList(imcItem),
+                            (imcItem) =>
+                                createItemImcList(UniqueKey(), imcItem),
                           )
                           .toList()))
             ],
@@ -114,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                               duration: const Duration(milliseconds: 3),
                               child: AnimatedContainer(
                                 duration: const Duration(milliseconds: 3),
-                                child: CreateImgImc(
+                                child: createImgImc(
                                     image: homePageController.imcImage),
                               ),
                             ),
@@ -191,32 +180,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  Card createItemImcList(ImcToday imcItem) {
-    return Card(
-      child: ListTile(
-        leading: CircleAvatar(child: Text('${imcItem.imc.round()}')),
-        trailing:
-            Text('Data: ${DateFormat('dd/mm/yyyy').format(imcItem.dateTime)}'),
-      ),
-    );
-  }
-}
-
-class CreateImgImc extends StatelessWidget {
-  const CreateImgImc({
-    super.key,
-    required this.image,
-  });
-
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return SvgPicture.asset(
-        placeholderBuilder: (_) =>
-            const Center(child: CircularProgressIndicator()),
-        image);
   }
 }

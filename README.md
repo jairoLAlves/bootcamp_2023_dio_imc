@@ -14,6 +14,11 @@
 
 - [x] Salvar com o hive ou SQLite
 
+## Capturas de Tela:
+<div style="">
+<img src="https://photos.onedrive.com/share/882515551C0A8F74!3028?cid=882515551C0A8F74&resId=882515551C0A8F74!3028&authkey=!ABy-z_giEUp2L0U&ithint=photo&e=HDjEWO" alt="Imc" style="height: 400px; width:200;"/>
+
+</div>
 
 
 ###  $ IMC = Peso / altura^2 $

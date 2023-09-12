@@ -13,7 +13,8 @@
 - [x] Exibir em uma Lista
 
 - [x] Salvar com o hive ou SQLite
-- [ ] 
+
+      
 ###  $ IMC = Peso / altura^2 $
 
 | IMC | Classificação |
